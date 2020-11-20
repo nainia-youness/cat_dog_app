@@ -11,6 +11,7 @@ class  Page extends Component{
     this.state={
         imgUrl:'',
         loading: false,
+        prediction:''
     }
 }
 
@@ -31,7 +32,9 @@ async componentDidUpdate(prevProps, prevState){
                         })
             await axios.post('/api',{'url':this.state.imgUrl})
                 .then(res=>{
-                    console.log(res)
+                    this.setState({
+                        prediction:res.data
+                    })
                 })
                 .catch(error=>{
                     console.log(error)
@@ -52,6 +55,11 @@ render() {
         <>
             <Container>
               <Row>
+                  <Col>
+                    this app classifies airplane, automobile, bird, cat, deer,dog, frog, horse, ship,truck
+                  </Col>
+              </Row>
+              <Row>
                 <Col>
                   <AploadImg data={
                             {img:this.state.imgUrl,ChangeImgUrl:this.changeImgUrl.bind(this)}}></AploadImg>
@@ -64,6 +72,11 @@ render() {
                             color={"orange"}
                             loading={this.state.loading}
                         />
+                  </Col>
+              </Row>
+              <Row>
+                  <Col>
+                     <h3>{this.state.prediction}</h3>
                   </Col>
               </Row>
             </Container>

@@ -1,16 +1,10 @@
 from flask import Flask,request
-#from flask_restful import Api,Resource,reqparse,abort
 import numpy as np
 import urllib.request
 import cv2
 import tensorflow as tf
 
 app=Flask(__name__)
-# api=Api(app)
-
-
-# video_put_args=reqparse.RequestParser()
-# video_put_args.add_argument("url",type=str,help="something went wrong")#help is an error msg
 
 def url_to_image(url):
          # download the image, convert it to a NumPy array, and then read
@@ -55,32 +49,6 @@ def login():
     prediction=predict(imgs,model)
     print(prediction)
     return prediction
-
-
-# class  Model(Resource):
-#     _counter = 0
-#     _m=tf.keras.Model()
-#     def __init__(self):
-#         Model._counter += 1
-#         self.id = Model._counter
-#         self.model=Model._m
-
-
-
-#     def post(self):
-#         args=video_put_args.parse_args()
-#         img=self.url_to_image(args.url)
-#         if(self.id==1):
-#             Model._m=self.model_load()
-#         imgs=self.preprocess_img(img)
-#         #prediction=imgs
-#         prediction=self.predict(imgs)
-#         print(prediction)
-#         return prediction,201
-
-
-
-#api.add_resource(Model,"/api")
 
 if __name__ == '__main__':
     app.run(debug=True)
